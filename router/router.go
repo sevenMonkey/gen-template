@@ -1,19 +1,16 @@
 package router
 
 import (
-	"{{projectName}}/app"
-	_ "{{projectName}}/docs"
-	"{{projectName}}/migrate"
-	"{{projectName}}/controller"
-	"{{projectName}}/pkg/middleware"
 	"github.com/gin-gonic/gin"
 	"github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
+	"{{projectName}}/app"
+	_ "{{projectName}}/docs"
+	"{{projectName}}/migrate"
+	"{{projectName}}/pkg/middleware"
 )
 
-func Start() {
-	app.InitConfig()
-	app.InitDB()
+func InitRouter() *gin.Engine {
 	migrate.CreateTable()
 
 	r := gin.Default()
@@ -29,7 +26,7 @@ func Start() {
 
 	//!!do not delete gen will generate router code at here
 
-	addr := app.Config.Http.Domain + ":" + app.Config.Http.Port
+	//addr := app.Config.Http.Domain + ":" + app.Config.Http.Port
 
-	r.Run(addr) // listen and serve on 0.0.0.0:8080
+	return r
 }

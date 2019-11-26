@@ -8,7 +8,7 @@ import (
 	"{{projectName}}/pkg/util"
 )
 type Common struct {
-	Id        string     `gorm:"size:30;primary_key" json:"id"`
+	Id        string     `gorm:"size:32;primary_key" json:"id"`
 	CreatedAt time.Time  `json:"createdAt"`
 	UpdatedAt time.Time  `json:"updatedAt"`
 	DeletedAt *time.Time `sql:"index" json:"deletedAt"`
@@ -66,6 +66,6 @@ func buildOrder(rawOrder string, db *gorm.DB) (*gorm.DB, error) {
 
 func (b *Common) BeforeCreate(scope *gorm.Scope) error {
 	//scope.SetColumn("Id", uuid.NewV4().String())
-	scope.SetColumn("Id", util.GetRandomString(8))
+	scope.SetColumn("Id", util.NewUuid())
 	return nil
 }

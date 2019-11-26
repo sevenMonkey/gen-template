@@ -2,6 +2,7 @@ package app
 
 import (
 	"fmt"
+	"log"
 	"time"
 
 	"github.com/jinzhu/gorm"
@@ -16,6 +17,9 @@ func InitDB() {
 	//Db, err = gorm.Open("mysql", "root:123456789@/chat?charset=utf8&parseTime=True&loc=Local")
 	DB, err = gorm.Open("mysql", mysqlArgs)
 
+	DB.Callback().Create().Replace("gorm:update_time_stamp", createCallback)
+	DB.Callback().Update().Replace("gorm:update_time_stamp", updateCallback)
+
 	// 全局禁用表名复数
 	DB.SingularTable(true)
 	DB.DB().SetConnMaxLifetime(60 * time.Second)
@@ -27,4 +31,32 @@ func InitDB() {
 	//defer DB.Close()
 	fmt.Println("DB connect success!!!", mysqlArgs)
 	DB.LogMode(true)
+}
+
+func createCallback(scope *gorm.Scope) {
+	if !scope.HasError() {
+		nowTime := time.Now().Unix()
+		if createTimeField, ok := scope.FieldByName("Created"); ok {
+			if createTimeField.IsBlank {
+				createTimeField.Set(nowTime)
+			}
+		}
+		if modifyTimeField, ok := scope.FieldByName("Updated"); ok {
+			if modifyTimeField.IsBlank {
+				modifyTimeField.Set(nowTime)
+			}
+		}
+	}
+}
+
+func updateCallback(scope *gorm.Scope) {
+	if _, ok := scope.Get("gorm:update_column"); !ok {
+		scope.SetColumn("Updated", time.Now().Unix())
+	}
+}
+
+func CloseDB()  {
+	if err :=  DB.Close(); err != nil{
+		log.Fatalf("models.close err:%v", err)
+	}
 }
