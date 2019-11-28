@@ -7,6 +7,7 @@ import (
 	"{{projectName}}/app"
 	_ "{{projectName}}/docs"
 	"{{projectName}}/migrate"
+	"{{projectName}}/controller"
 	"{{projectName}}/pkg/middleware"
 )
 
