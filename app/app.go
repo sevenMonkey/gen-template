@@ -20,7 +20,7 @@ func RespJson(c *gin.Context, errCode int, data interface{} )  {
 	c.JSON(http.StatusOK, Resp{Code:errCode, Data:data, Msg:e.GetMsg(errCode)})
 }
 
-func RespRaw(c *gin.Context, data []byte)  {
+func RespRawJson(c *gin.Context, data []byte)  {
 	c.Data(http.StatusOK, "Content-Type:application/json", data)
 }
 
