@@ -1,6 +1,7 @@
 package util
 
 import (
+	"errors"
 	"math/rand"
 	"reflect"
 	"time"
@@ -45,17 +46,19 @@ func DeepFields(ifaceType reflect.Type) []reflect.StructField {
 	return fields
 }
 
-func StructCopy(DstStructPtr interface{}, SrcStructPtr interface{}) {
+func StructCopy(DstStructPtr interface{}, SrcStructPtr interface{}) (err error) {
 	srcv := reflect.ValueOf(SrcStructPtr)
 	dstv := reflect.ValueOf(DstStructPtr)
 	srct := reflect.TypeOf(SrcStructPtr)
 	dstt := reflect.TypeOf(DstStructPtr)
 	if srct.Kind() != reflect.Ptr || dstt.Kind() != reflect.Ptr ||
 		srct.Elem().Kind() == reflect.Ptr || dstt.Elem().Kind() == reflect.Ptr {
-		panic("Fatal error:type of parameters must be Ptr of value")
+		err = errors.New("Fatal error:type of parameters must be Ptr of value")
+		return
 	}
 	if srcv.IsNil() || dstv.IsNil() {
-		panic("Fatal error:value of parameters should not be nil")
+		err = errors.New("Fatal error:value of parameters should not be nil")
+		return
 	}
 	srcV := srcv.Elem()
 	dstV := dstv.Elem()
