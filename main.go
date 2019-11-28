@@ -6,13 +6,14 @@ import (
 	"log"
 	"net/http"
 	"{{projectName}}/app"
+	"{{projectName}}/app/logging"
 	"{{projectName}}/router"
 )
 
 func init() {
 	app.InitConfig()
 	app.InitDB()
-	app.InitLog()
+	logging.InitLog()
 }
 
 func main() {

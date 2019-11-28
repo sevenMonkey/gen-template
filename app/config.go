@@ -21,7 +21,7 @@ type config struct {
 		DBType   string
 		User     string
 		Password string
-		Name   string
+		Name     string
 	}
 	Version struct {
 		Release string
@@ -36,12 +36,12 @@ type config struct {
 }
 
 var (
-	cfg            *ini.File
+	cfg *ini.File
 )
 
 func InitConfig() {
 	var err error
-	cfg, err = ini.Load("conf/conf.ini")
+	cfg, err = ini.Load("config/config.ini")
 	if err != nil {
 		log.Fatalf("settting.Setup, fail to load conf file:%v", err)
 	}
@@ -49,8 +49,8 @@ func InitConfig() {
 	sectionMapTo("app", &Config.App)
 	sectionMapTo("database", &Config.DB)
 	sectionMapTo("version", &Config.Version)
-	Config.Server.ReadTimeout = Config.Server.ReadTimeout*time.Second
-	Config.Server.WriteTimeout = Config.Server.WriteTimeout*time.Second
+	Config.Server.ReadTimeout = Config.Server.ReadTimeout * time.Second
+	Config.Server.WriteTimeout = Config.Server.WriteTimeout * time.Second
 }
 
 func sectionMapTo(section string, v interface{}) {

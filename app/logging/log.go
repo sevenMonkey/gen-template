@@ -1,4 +1,4 @@
-package app
+package logging
 
 import (
 	"fmt"
@@ -7,6 +7,7 @@ import (
 	"path/filepath"
 	"runtime"
 	"time"
+	"{{projectName}}/app"
 	"{{projectName}}/pkg/file"
 )
 
@@ -43,15 +44,15 @@ func InitLog() {
 
 // getLogFilePath get the log file save path
 func getLogFilePath() string {
-	return fmt.Sprintf("%s%s", Config.App.RuntimeRootPath, Config.App.LogSavePath)
+	return fmt.Sprintf("%s%s", app.Config.App.RuntimeRootPath, app.Config.App.LogSavePath)
 }
 
 // getLogFileName get the save name of the log file
 func getLogFileName() string {
 	return fmt.Sprintf("%s%s.%s",
-		Config.App.LogSaveName,
-		time.Now().Format(Config.App.LogTimeFormat),
-		Config.App.LogFileExt,
+		app.Config.App.LogSaveName,
+		time.Now().Format(app.Config.App.LogTimeFormat),
+		app.Config.App.LogFileExt,
 	)
 }
 
