@@ -4,14 +4,15 @@ import (
 	"errors"
 	"github.com/jinzhu/gorm"
 	"strings"
+	"time"
 	"{{projectName}}/pkg/util"
 )
 
 type Common struct {
-	Id        string `gorm:"size:32;primary_key" json:"id"`
-	CreatedAt int64  `json:"created_at"`
-	UpdatedAt int64  `json:"updated_at"`
-	DeletedAt string  `sql:"index" json:"-"`
+	Id        string     `gorm:"size:32;primary_key" json:"id"`
+	CreatedAt int64      `json:"created_at"`
+	UpdatedAt int64      `json:"updated_at"`
+	DeletedAt *time.Time `sql:"index" json:"-"`
 }
 
 func buildWhere(rawQuery string, db *gorm.DB) (*gorm.DB, error) {
