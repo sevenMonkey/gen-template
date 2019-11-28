@@ -4,7 +4,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
-	"{{projectName}}/app"
 	_ "{{projectName}}/docs"
 	"{{projectName}}/migrate"
 	"{{projectName}}/controller"
