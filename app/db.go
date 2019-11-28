@@ -36,12 +36,12 @@ func InitDB() {
 func createCallback(scope *gorm.Scope) {
 	if !scope.HasError() {
 		nowTime := time.Now().Unix()
-		if createTimeField, ok := scope.FieldByName("Created"); ok {
+		if createTimeField, ok := scope.FieldByName("created_at"); ok {
 			if createTimeField.IsBlank {
 				createTimeField.Set(nowTime)
 			}
 		}
-		if modifyTimeField, ok := scope.FieldByName("Updated"); ok {
+		if modifyTimeField, ok := scope.FieldByName("updated_at"); ok {
 			if modifyTimeField.IsBlank {
 				modifyTimeField.Set(nowTime)
 			}
@@ -51,7 +51,7 @@ func createCallback(scope *gorm.Scope) {
 
 func updateCallback(scope *gorm.Scope) {
 	if _, ok := scope.Get("gorm:update_column"); !ok {
-		scope.SetColumn("Updated", time.Now().Unix())
+		scope.SetColumn("updated_at", time.Now().Unix())
 	}
 }
 

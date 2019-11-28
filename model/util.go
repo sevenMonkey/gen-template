@@ -11,7 +11,7 @@ type Common struct {
 	Id        string `gorm:"size:32;primary_key" json:"id"`
 	CreatedAt int64  `json:"created_at"`
 	UpdatedAt int64  `json:"updated_at"`
-	DeletedAt int64  `sql:"index" json:"deleted_at"`
+	DeletedAt string  `sql:"index" json:"deleted_at"`
 }
 
 func buildWhere(rawQuery string, db *gorm.DB) (*gorm.DB, error) {

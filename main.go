@@ -7,12 +7,16 @@ import (
 	"net/http"
 	"{{projectName}}/app"
 	"{{projectName}}/app/logging"
+	"{{projectName}}/migrate"
 	"{{projectName}}/router"
 )
 
 func init() {
 	app.InitConfig()
 	app.InitDB()
+	if gin.Mode() == gin.DebugMode{
+		migrate.CreateTable()
+	}
 	logging.InitLog()
 }
 
