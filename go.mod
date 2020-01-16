@@ -3,12 +3,14 @@ module {{projectName}}
 require (
 	cloud.google.com/go v0.49.0 // indirect
 	github.com/denisenkom/go-mssqldb v0.0.0-20181014144952-4e0d7dc8888f // indirect
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/erikstmartin/go-testdb v0.0.0-20160219214506-8d10e4a1bae5 // indirect
 	github.com/gin-contrib/sse v0.0.0-20170109093832-22d885f9ecc7 // indirect
 	github.com/gin-gonic/gin v1.3.0
 	github.com/go-ini/ini v1.51.0
 	github.com/go-openapi/jsonreference v0.17.2 // indirect
 	github.com/go-openapi/spec v0.17.2 // indirect
+	github.com/go-redis/redis/v7 v7.0.0-beta.5
 	github.com/go-sql-driver/mysql v1.4.1 // indirect
 	github.com/google/uuid v1.1.1
 	github.com/jinzhu/gorm v1.9.1
