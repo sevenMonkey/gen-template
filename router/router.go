@@ -5,9 +5,8 @@ import (
 	"github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
 	_ "{{projectName}}/docs"
+	"{{projectName}}/middleware"
 	"{{projectName}}/migrate"
-	"{{projectName}}/controller"
-	"{{projectName}}/pkg/middleware"
 )
 
 func InitRouter() *gin.Engine {
